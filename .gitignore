@@ -3,23 +3,23 @@
 Thumbs.db
 
 # Python
-backend/venv/               # Virtual environment folder
-*.pyc                        # Compiled Python files
-__pycache__/                 # Python cache directory
+backend/venv/
+*.pyc
+__pycache__/
 *.pyo
 *.pyd
 *.pdb
 
 # Environment variables
-backend/.venv                 # Backend environment variables
+backend/.env
 
 # Node.js / Svelte
-frontend/node_modules/       # Node.js modules
-frontend/build/              # Build output directory (if any)
-frontend/public/build/       # Vite-generated output (if using Vite)
-frontend/.svelte-kit/        # SvelteKit generated files
-frontend/.env                # Frontend environment variables (if applicable)
+frontend/node_modules/
+frontend/build/
+frontend/public/build/
+frontend/.svelte-kit/
+frontend/.env
 
 # IDE / Editor-specific
-.vscode/                     # VS Code settings
+.vscode/
 
