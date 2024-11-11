@@ -29,7 +29,7 @@ async def test(value: str = Form()):
         return {"message": "Successfully added value"}
     except Exception as e:
         return {"error": str(e)}
-    
+
 @app.post("/api/signup")
 async def signup(email: str = Form(), password: str = Form()):
     try:
@@ -43,8 +43,8 @@ async def signin(response: Response, email: str = Form(), password: str = Form()
     try:
         session = sp_signin(email, password)
         access_token = session.session.access_token
-        print(session.session.access_token)
-                # Set JWT token in a secure HTTP-only cookie
+
+        # Set JWT token in a secure HTTP-only cookie
         response.set_cookie(
             key="access_token",
             value=access_token,
@@ -55,7 +55,7 @@ async def signin(response: Response, email: str = Form(), password: str = Form()
         return {"message": f"Successfully signed in: {session}"}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e))
-    
+
 @app.post("/api/logout")
 async def logout(response: Response):
     try:
@@ -65,8 +65,6 @@ async def logout(response: Response):
         return {"message": f"Successfully logged out: {logout_response}"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-    
 
 @app.get("/api/current_user")
 def get_current_user():
@@ -80,7 +78,6 @@ async def start_subscription(response: Response):
     try:
         user = sp_get_user()
         subscription_response = sp_start_subscription(user)
-
         return {"message": f"Successfully subscribed: {subscription_response}"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

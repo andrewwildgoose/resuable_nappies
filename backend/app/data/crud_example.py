@@ -16,10 +16,12 @@ def sp_add_test_value(value: str):
     return supabase.from_("Test").insert([{"value": value}]).execute()
 
 def sp_signup(email: str, password: str):
-    return supabase.auth.sign_up({
+    sign_up_response = supabase.auth.sign_up({
             'email': email,
             'password': password,
         })
+    return sign_up_response
+
 
 def sp_signin(email: str, password: str):
     try:
@@ -33,13 +35,15 @@ def sp_signin(email: str, password: str):
         raise Exception(f"Sign-in failed: {str(e)}")
 
 def sp_logout():
-    return supabase.auth.sign_out()
+    log_out_response = supabase.auth.sign_out()
+    return log_out_response
 
 def sp_get_user():
-    print(supabase.auth.get_user())
-    return supabase.auth.get_user()
+    user = supabase.auth.get_user()
+    return user
 
 def sp_start_subscription(user):
-    user_id = user.user.id
-    print(user_id)
-    return supabase.from_("Subscriptions").insert([{"user_id": user_id, "active": "TRUE"}]).execute()
+    user_id: str = user.user.id
+    data = [{"user_id": user_id, "active": "TRUE"}]
+    response = (supabase.table("Subscriptions").insert(data).execute())
+    return response
