@@ -52,7 +52,7 @@ async def signin(response: Response, email: str = Form(), password: str = Form()
             secure=True,
             samesite="Lax"
         )
-        return {"message": f"Successfully signed in: {session}"}
+        return {"success": True}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e))
 
