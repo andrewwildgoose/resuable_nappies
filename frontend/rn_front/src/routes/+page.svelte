@@ -1,36 +1,34 @@
 <script>
     import CustCardandImg from '../lib/CustCardandImg.svelte';
-    import Login from '../lib/Login.svelte';
 
     // Define variables for text and reverse state
-    let vCard = false;
-    let cardTitle = 'Reusable Nappies - crazy! Right...?';
-    let cardDescription = 'Lets talk about how reusable nappies could save you money and the planet!';
-    let buttonText = 'Read more';
-    let imageSrc = '/images/product_example_1.jpg';
+    let imageSrc1 = '/images/product_example_1.jpg';
+    let imageSrc2 = '/images/product_example_2.jpg';
 </script>
 
 <div class="flex flex-col items-center justify-center">
-    <div class="w-full p-5">
-        <h1 class="text-4xl text-center text-pastel-coral">Reusable Nappies</h1>
+    <div class="w-full p-5 bg-soft-sky-blue border-b border-warm-yellow">
+        <h1 class="text-4xl text-center text-white">Reusable Nappies</h1>
     </div>
-    <div class="grid grid-cols-3 gap-4 w-full p-5 border-2 border-solid border-pastel-coral">
-        <CustCardandImg 
-            imgSrc={imageSrc}
-            title={cardTitle}
-            description={cardDescription}
-            buttonText={buttonText}
-            reverse={vCard}
+    
+
+    <div class="grid grid-cols-3 gap-4 w-full p-5">
+
+    </div>
+            <CustCardandImg 
+            imgSrc={imageSrc1}
+            title={'Reusable Nappies - crazy! Right...?'}
+            description={'Lets talk about how reusable nappies could save you money and the planet!'}
+            buttonText={'Read more'}
+            reverse={false}
         />        
-        <Login />   
         <CustCardandImg 
-            imgSrc={imageSrc}
-            title={cardTitle}
-            description={cardDescription}
-            buttonText={buttonText}
-            reverse={vCard}
+            imgSrc={imageSrc2}
+            title={'How can you get involved?'}
+            description={'We offer a subscription service to help take a load off your mind (and your washing machine)'}
+            buttonText={'Find out more'}
+            reverse={false}
         />   
-    </div>
 </div>
 
 

@@ -10,7 +10,11 @@
 </script>
 
 <div class="space-y-6">
-    <Card class="bg-warm-yellow md:max-w-2xl" img={imgSrc}>
+    <Card 
+    class="bg-light-beige md:max-w-2xl shadow-none rounded-none border border-solid border-pastel-coral" 
+    img={imgSrc} 
+    imgAlt="Card Image" 
+    imgClass='rounded-none' >
         <h5 class="mb-2 text-2xl font-sans tracking-tight text-black dark:text-white">
             {title}
         </h5>

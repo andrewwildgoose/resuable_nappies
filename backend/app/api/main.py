@@ -1,11 +1,11 @@
-from fastapi import FastAPI, Form, Request, HTTPException, Response
-import jwt.utils
+from fastapi import FastAPI, Form, Request, HTTPException, Response, Depends
+from fastapi.security import HTTPBearer
 from app.data.crud_example import sp_get_test, sp_add_test_value, sp_signup, sp_signin, sp_logout, sp_get_user, sp_start_subscription
 import os
-from jwt import JWT, jwk_from_dict
+from jwt import JWT
 
 app = FastAPI()
-jwt = JWT()
+
 
 from supabase import create_client, Client
 
@@ -52,7 +52,7 @@ async def signin(response: Response, email: str = Form(), password: str = Form()
             secure=True,
             samesite="Lax"
         )
-        return {"success": True}
+        return {"success": True, "user": session.user}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e))
 
@@ -66,12 +66,13 @@ async def logout(response: Response):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/current_user")
-def get_current_user():
+@app.get("/api/user")
+async def get_user_info():
     try:
-        return sp_get_user()
+        user_info = sp_get_user()
+        return user_info
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=401, detail=str(e))
     
 @app.post("/api/start_subscription")
 async def start_subscription(response: Response):

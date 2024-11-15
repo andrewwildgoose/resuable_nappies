@@ -22,12 +22,31 @@ export const actions = {
             const result = await response.json();
 
             if (response.ok) {
-                console.log('Login successful:', result.message);
-                // Redirect using SvelteKit's helper
-                return { success: true };
+                console.log('Login successful');
+
+                const userResponse = await fetch('http://127.0.0.1:8000/api/user', {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+
+                const userData = await userResponse.json();
+
+                if (userResponse.ok) {
+                    // Store user session data in cookies or server-side session
+                    event.cookies.set('user_id', userData.id, {
+                        httpOnly: true,
+                        secure: true,
+                        path: '/',
+                        sameSite: 'lax'
+                    });
+                    console.log('User: ', userData)
+                    return { success: true, user: userData };
+                } else {
+                    console.error('Failed to fetch user data:', userData.detail);
+                    return { error: true, message: 'Failed to retrieve user session.' };
+                }
             } else {
                 console.error('Login failed:', result.detail);
-                // Return an error message as part of the action response
                 return { error: true, message: result.detail };
             }
         } catch (error) {
@@ -35,4 +54,4 @@ export const actions = {
             return { error: true, message: 'An error occurred during login.' };
         }
     }
-}
+};
