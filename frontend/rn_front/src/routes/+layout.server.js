@@ -1,4 +1,4 @@
-export async function load({ cookies, fetch }) {
+export async function load({ fetch }) {
     console.log("Executing +layout.server.js load function");
 
     try {
@@ -15,7 +15,9 @@ export async function load({ cookies, fetch }) {
             console.log("Failed to fetch user data");
             return { user: null, loggedIn: false };
         }
-        console.log("User data:", userData);
+        if (!userData === null) {
+            console.log("User data from routes:", userData.user.email);
+        }
         return { user: userData, loggedIn: true };
     } catch (error) {
         console.error("Error during user fetch:", error);

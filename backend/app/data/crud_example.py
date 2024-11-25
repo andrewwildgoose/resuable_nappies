@@ -1,3 +1,4 @@
+from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -42,8 +43,23 @@ def sp_get_user():
     user = supabase.auth.get_user()
     return user
 
+def sp_get_user_sub_info(user):
+    user_id: str = user.user.id
+    response = (supabase.table("Subscriptions").select("*").eq("user_id", user_id).execute())
+    return response
+
 def sp_start_subscription(user):
     user_id: str = user.user.id
     data = [{"user_id": user_id, "active": "TRUE"}]
     response = (supabase.table("Subscriptions").insert(data).execute())
+    return response
+
+def sp_pause_subscription(user):
+    user_id: str = user.user.id
+    data = {"active": "FALSE"}
+    response = (
+        supabase.table("Subscriptions")
+        .update(data)
+        .eq("user_id", user_id)
+        .execute())
     return response

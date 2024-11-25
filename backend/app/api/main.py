@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Form, Request, HTTPException, Response, Depends
 from fastapi.security import HTTPBearer
-from app.data.crud_example import sp_get_test, sp_add_test_value, sp_signup, sp_signin, sp_logout, sp_get_user, sp_start_subscription
+from app.data.crud_example import sp_get_test, sp_add_test_value, sp_signup, sp_signin, sp_logout, sp_get_user, sp_start_subscription, sp_get_user_sub_info, sp_pause_subscription
 import os
 from jwt import JWT
 
@@ -73,12 +73,30 @@ async def get_user_info():
         return user_info
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e))
-    
+
+@app.get("/api/user_sub_info")
+async def get_user_sub_info():
+    try:
+        user = sp_get_user()
+        user_info = sp_get_user_sub_info(user)
+        return user_info
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=str(e))
+
 @app.post("/api/start_subscription")
 async def start_subscription(response: Response):
     try:
         user = sp_get_user()
         subscription_response = sp_start_subscription(user)
         return {"message": f"Successfully subscribed: {subscription_response}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/api/pause_subscription")
+async def start_subscription(response: Response):
+    try:
+        user = sp_get_user()
+        subscription_response = sp_pause_subscription(user)
+        return {"message": f"Successfully paused subscription: {subscription_response}"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

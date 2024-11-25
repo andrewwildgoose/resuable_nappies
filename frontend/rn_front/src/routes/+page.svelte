@@ -2,33 +2,37 @@
     import CustCardandImg from '../lib/CustCardandImg.svelte';
 
     // Define variables for text and reverse state
+    let logo = '/images/logo_transparent.webp';
     let imageSrc1 = '/images/product_example_1.jpg';
     let imageSrc2 = '/images/product_example_2.jpg';
 </script>
 
 <div class="flex flex-col items-center justify-center">
-    <div class="w-full p-5 bg-soft-sky-blue border-b border-warm-yellow">
-        <h1 class="text-4xl text-center text-white">Reusable Nappies</h1>
-    </div>
     
+    <div class="relative h-screen w-full overflow-hidden border-2 border-solid border-pastel-coral">
+        <!-- Background Image -->
+        <img 
+            src="{imageSrc1}"
+            alt="Large product" 
+            class="absolute inset-0 h-full w-full object-cover"
+        />
 
-    <div class="grid grid-cols-3 gap-4 w-full p-5">
-
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-l from-[rgba(0,0,0,0.7)] to-transparent"></div>
+        <!-- Text and Logo -->
+        <div class="relative z-10 flex flex-col items-start justify-center h-full px-8 md:px-16 text-white">
+            <!-- Logo -->
+            <img src="{logo}" alt="Logo" class="h-24 w-auto md:h-24" />
+        
+            <!-- Text -->
+            <h1 class="mt-6 text-4xl font-bold md:text-6xl">
+                Welcome to Our Service
+            </h1>
+            <p class="mt-4 text-lg md:text-2xl max-w-xl">
+                Discover the best experience with our amazing platform.
+            </p>
+        </div>
     </div>
-            <CustCardandImg 
-            imgSrc={imageSrc1}
-            title={'Reusable Nappies - crazy! Right...?'}
-            description={'Lets talk about how reusable nappies could save you money and the planet!'}
-            buttonText={'Read more'}
-            reverse={false}
-        />        
-        <CustCardandImg 
-            imgSrc={imageSrc2}
-            title={'How can you get involved?'}
-            description={'We offer a subscription service to help take a load off your mind (and your washing machine)'}
-            buttonText={'Find out more'}
-            reverse={false}
-        />   
 </div>
 
 

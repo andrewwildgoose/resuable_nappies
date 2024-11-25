@@ -40,7 +40,8 @@ export const actions = {
                         sameSite: 'lax'
                     });
                     console.log('User: ', userData)
-                    return { success: true, user: userData };
+
+                    return { success: true };
                 } else {
                     console.error('Failed to fetch user data:', userData.detail);
                     return { error: true, message: 'Failed to retrieve user session.' };

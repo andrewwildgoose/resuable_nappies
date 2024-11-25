@@ -1,14 +1,22 @@
 <script>
+    import { Button } from 'flowbite-svelte';
+    import { goto } from '$app/navigation';
+    import UserNavBar from '../lib/UserNavBar.svelte';
+    import PublicNavBar from '../lib/PublicNavBar.svelte';
     import "../app.css";
     // data for user
     export let data;
+
+    function navigateTo(route) {
+        goto(route);
+    }
+
 </script>
 
 {#if data.user}
-    <p>Welcome back, {data.user.user.email}!</p>
-    <button on:click={() => logout()}>Logout</button>
+    <UserNavBar data={data} />
 {:else}
-    <p>You are not logged in.</p>
+    <PublicNavBar />
 {/if}
 
 <slot />
