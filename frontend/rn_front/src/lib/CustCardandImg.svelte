@@ -21,7 +21,7 @@
         <p class="mb-3 font-sans text-gray dark:text-gray-400 leading-tight">
             {description}
         </p>
-        <Button class="bg-mint-green text-deep-teal hover:bg-pastel-coral">
+        <Button class="bg-mint-green text-deep-teal hover:bg-pastel-coral rounded-none">
             {buttonText}
         </Button>
     </Card>

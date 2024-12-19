@@ -14,6 +14,9 @@ export default {
         'light-beige': '#F7F5E7',
         'deep-teal': '#1E656D',
       },
+      fontFamily: {
+        lilita: ['Lilita One', 'sans-serif'], // Add 'Bowlby One' to the fontFamily
+      },
     },
   },
   plugins: [require('flowbite/plugin')],

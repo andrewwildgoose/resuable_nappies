@@ -1,10 +1,18 @@
 <script>
+    import { Button, P} from 'flowbite-svelte';
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
     import CustCardandImg from '../lib/CustCardandImg.svelte';
+
 
     // Define variables for text and reverse state
     let logo = '/images/logo_transparent.webp';
     let imageSrc1 = '/images/product_example_1.jpg';
     let imageSrc2 = '/images/product_example_2.jpg';
+
+    function navigateTo(route) {
+        goto(route);
+    }
 </script>
 
 <div class="flex flex-col items-center justify-center">
@@ -25,12 +33,15 @@
             <img src="{logo}" alt="Logo" class="h-24 w-auto md:h-24" />
         
             <!-- Text -->
-            <h1 class="mt-6 text-4xl font-bold md:text-6xl">
+            <h1 class="mt-6 text-2xl font-lilita md:text-4xl">
                 Welcome to Our Service
             </h1>
             <p class="mt-4 text-lg md:text-2xl max-w-xl">
                 Discover the best experience with our amazing platform.
             </p>
+            <div class="mt-4 h-10">
+                <Button on:click={() => navigateTo('/service-planner')} size="sm" class="w-full px-5 py-3 bg-pastel-coral text-2xl text-white font-lilita rounded-none hover:bg-mint-green">See how it works</Button>
+            </div>
         </div>
     </div>
 </div>

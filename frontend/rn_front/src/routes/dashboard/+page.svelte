@@ -3,13 +3,16 @@
     import  Dashboard from '../../lib/Dashboard.svelte';
 	/** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
+    let imageSrc2 = '/images/product_example_2.jpg';
 </script>
 
 <div class="flex flex-col items-center justify-center">
     <Dashboard 
         userEmail={data.user.user.email}
         hasActiveSubscription={data.subscriptionInfo[0].active}
-        nextDeliveryWindow="December 1, 2024, between 2:00 PM and 5:00 PM"
+        subscriptionType="Basic Package"
+        subscriptionImage={imageSrc2}
+        nextDeliveryWindow="December 25, 2024, between 2:00 PM and 5:00 PM"
     />
 
     <!-- Logout form -->
